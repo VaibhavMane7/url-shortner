@@ -1,5 +1,6 @@
 package com.url.shortner.security.jwt;
 
+import com.url.shortner.service.UserDetailsImpl;
 import jakarta.servlet.http.HttpServletRequest;
 
 public class Jwtutils {
@@ -9,5 +10,10 @@ public class Jwtutils {
             return bearerToken.substring(7);
         }
         return null;
+    }
+
+    public String generateToken(UserDetailsImpl userDetails){
+        String username=userDetails.getUsername();
+        String roles=userDetails.getAuthorities().stream()
     }
 }
