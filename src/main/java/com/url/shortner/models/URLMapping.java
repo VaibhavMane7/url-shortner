@@ -13,7 +13,7 @@ public class URLMapping {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private  String originalURl;
-    private  String shortURL;
+    private  String shortUrl;
     private int clickCount;
     private LocalDateTime createdDate;
     @ManyToOne

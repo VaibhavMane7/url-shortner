@@ -17,7 +17,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
@@ -66,6 +65,10 @@ public class WebSecurityConfig {
                 );
 
         http.authenticationProvider(authenticationProvider());
+        // The line below adds the custom JWT filter before the standard username/password filter.
+        // If a request is made to a secured endpoint (like /api/urls/shorten) without a valid JWT,
+        // the JwtAuthenticationFFilter will not populate the SecurityContextHolder, which leads to
+        // the "Set SecurityContextHolder to anonymous SecurityContext" log message.
         http.addFilterBefore(jwtAuthenticationFFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
